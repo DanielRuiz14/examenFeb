@@ -6,23 +6,35 @@ from bson import ObjectId
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 
+# Variable que se ejecuta desde Procfile
 app = Flask(__name__)
 
+#uri conexión a la base de datos en MongoDBAtlas
 # uri = 'mongodb+srv://canal:canal@cluster0.vodgj.mongodb.net/appsNube?retryWrites=true&w=majority'
+uri = 'mongodb+srv://admin:admin@cluster0.up6fc.mongodb.net/examenFeb?retryWrites=true&w=majority'
+# uri = os.environ['MONGODB_URI'] + '?retryWrites=true&w=majority' 
 
-uri = os.environ['MONGODB_URI'] + '?retryWrites=true&w=majority' 
-
+# Llámamos a un cliente Mongo que accede a partir de la uri
 client = pymongo.MongoClient(uri)
 
+#Para acceder a la base de datos lo haremos con esta línea (entra a la base de datos por defecto)
 db = client.get_default_database()  
 
+# Seleccionamos la colección que vamos a usar de la base de datos. 
 ads = db['ads']
+# ads = db['publicaciones']
+
+# --------------------------------- Funciones -------------------------------- #
 
 # Definicion de metodos para endpoints
 
+# URL desde donde llaman a esta función
 @app.route('/', methods=['GET'])
 def showAds():
-    
+    # render template params{
+    # Plantilla html que queremos que se muestre
+    # ads ? le pasamos un json que se obtiene de la base de datos con esa búsqueda
+    # }
     return render_template('ads.html', ads = list(ads.find().sort('date',pymongo.DESCENDING)))
     
 @app.route('/new', methods = ['GET', 'POST'])
