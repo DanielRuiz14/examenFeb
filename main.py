@@ -18,7 +18,11 @@ uri = 'mongodb+srv://admin:admin@cluster0.up6fc.mongodb.net/examenFeb?retryWrite
 client = pymongo.MongoClient(uri)
 
 #Para acceder a la base de datos lo haremos con esta línea (entra a la base de datos por defecto)
-db = client.get_default_database()  
+# Para coger una base de datos concreta tendremos que escribir lo siguiente
+# db = client.examenFeb
+# o en su defecto
+db = client['examenFeb']
+# db = client.get_default_database()  
 
 # Seleccionamos la colección que vamos a usar de la base de datos. 
 ads = db['ads']
