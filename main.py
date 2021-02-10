@@ -65,11 +65,6 @@ def subirImagen_imgur(archivo):
     # Devuelve la URL de la imagen
     return json.loads(j1.content)['data']['link']
 
-
-
-
-
-
 # Definicion de metodos para endpoints
 @app.route('/probarToken', methods=['POST'])
 def probar_token():
