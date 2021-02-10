@@ -66,11 +66,7 @@ def subirImagen_imgur(archivo):
     return json.loads(j1.content)['data']['link']
 
 
-def login_required():
-    if ( not session.get('token')):
-        
-        return redirect(url_for('login')) 
-    print('El token es' + session.get('token'))
+
 
 
 
@@ -82,19 +78,13 @@ def probar_token():
         "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + request.form['idtoken']
     )
     session['token'] = request.form['idtoken']
-    print('Respuesta del servidor de Google ' + str(req.json))
+    print('Hemos guardado el token')
     return str('Autentificación completada')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET'])
 def login():
-    if request.method == 'GET':
-        print('Entramos al login')
-        return render_template('login.html') # En principio no le pasamos ningún dato
-    else:
-        print('Guardamos el token en la sesión')
-        
-        
-        return probar_token()
+    print('Entramos al login')
+    return render_template('login.html') # En principio no le pasamos ningún dato
 
 @app.route('/', methods=['GET'])
 def inicio():
