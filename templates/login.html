@@ -37,7 +37,7 @@ and open the template in the editor.
                 /*Acceso a la página principal*/
 
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'http://'+window.location.origin+'/probarToken');
+                xhr.open('POST', window.location.origin+'/probarToken');
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.onload = function() { console.log('Signed in as: ' + xhr.responseText); };
                 xhr.send('idtoken=' + id_token);
