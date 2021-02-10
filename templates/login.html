@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Google OAuth login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+            <!-- Bootstrap Core CSS -->
+        <link href="static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="static/css/style.css" rel="stylesheet">
+        <!-- INSERT YOUR <CLIENT_ID> IN THE LINE BELOW -->
+        
+        <!-- Es necesario limpiar la cache del navegador si editamos el OAuth Client para fijar origenes -->
+        
+        <meta name="google-signin-client_id" content="8641641117-81jc03euppe4f0kdvbmgn1320c9djt49.apps.googleusercontent.com">
+
+        <script>
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId() + 'Do not send to your backend! Use an ID token instead.'); 
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+                var id_token = googleUser.getAuthResponse().id_token;
+                console.log('ID token: ' + id_token);
+                
+                console.log('You can check the ID token with:');
+                console.log('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=<ID token>');
+                console.log('for instance:');
+                console.log('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + id_token);      
+
+                /*Acceso a la página principal*/
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://localhost:5000/probarToken');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() { console.log('Signed in as: ' + xhr.responseText); };
+                xhr.send('idtoken=' + id_token);
+                
+                window.location.replace(window.location.origin + "/")
+                }
+            
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                    });
+                }
+        </script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+    </head>
+    <body>
+        <h1>Log in</h1>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <button class='btn btn-info' href="#" onclick="signOut();">Sign out</button>
+    </body>
+</html>

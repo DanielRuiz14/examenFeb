@@ -3,42 +3,54 @@
 
 <div class="row">
     <div class="col-lg-12 text-center">
-        <h1>misAnuncios (MongoDB y Heroku)<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></h1>
+        <h1>Examen</h1>
 
     </div>
 </div>
 <br/>
-<a class="btn btn-primary" href="/new">
-    Crear anuncio
-    <span style="margin-left: 5px;" class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-</a>
-
-<button class='btn btn-info' href="#" onclick="signOut();">Sign out</button>
+<div class="btn-group">
+    <a class="btn btn-primary" href="/new">
+        Crear publicación
+    </a>
+    
+    <button class='btn btn-danger' href="#" onclick="signOut();">Sign out</button>
+</div>
 <br/>
 <br/>
 
-{% if ads|count > 0 %}
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <table class="table">
-            <thead>
-            <th>Descripci&oacute;n</th>
-            <th>E-mail</th>
-            <th>Fecha de creaci&oacute;n</th>
-            <th>Prioridad</th>
-            <th>Acciones</th>
-            </thead>
-            <tbody>
-            {% for ad in ads %}
-            <tr>
-                <td>{{ ad.text }}</td>
-                <td>{{ ad.author }}</td>
-                <td>{{ ad.date.strftime('%d-%m-%Y') }}</td>
-                <td>{{ ad.priority }}</td>
-                <td><a class="btn btn-warning" href="/edit/{{ ad._id}}">Editar </a></td>
-            </tr>
-            {% endfor %}
+{% if dic|count > 0 %}
+
+{% for p in dic %}
+<div class="container border border-2 border-secondary rounded rounded-3 m-2">
+  
+    <div class="m-3">
+        <div class="col-12">
+            <h4>
+                {{p.titulo}}
+            </h4>
+            <hr>
+        </div>   
+        <div class="row">
+            <div class="col">
+                <img src="{{p.imagen}}" class="img-fluid rounded-3 border-3" alt="No hay imagen">
+            </div>
+            <div class="col">
+                <div class="row">
+                    <strong>Fecha:</strong>
+                    <p>
+                        Introducir fecha
+                    </p> 
+                </div>
+                    <a class="btn btn-info " href="edit/{{p._id}}">Editar</a>
+                
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endfor %}
+    
             </tbody>
         </table>
     </div>
@@ -49,7 +61,7 @@
     <div class="col-lg-12 text-center">
         <div class="col-md-3"></div>
         <div class="col-md-6 bg-warning warning_mesagge">
-            <label>No existen anuncios todav&iacute;a.</label>
+            <label>No existen publicaciones todav&iacute;a.</label>
         </div>
         <div class="col-md-3"></div>
 

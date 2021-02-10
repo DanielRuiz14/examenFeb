@@ -16,31 +16,19 @@
     <div class="col-md-8">
         <form class="form-horizontal" role="form" action="" method="post">
             <div class="form-group">
-                <label for="inputAuthor" class="col-sm-3 control-label">Email</label>
+                <label for="titulo" class="col-3 control-label">Titulo</label>
 
-                <div class="col-sm-6">
-                    <input type="email" class="form-control" name="inputAuthor" id="inputAuthor" placeholder="author" value="{{ ad.author }}">
+                <div class="col-6">
+                    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="{{titulo}}" value="{{p.titulo}}">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="inputText" class="col-sm-3 control-label">Descripci&oacute;n</label>
-
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="inputText" id="inputText"
-                           placeholder="text" value="{{ ad.text }}">
-                </div>
+            <div class="my-3">
+                <img src="{{p.imagen}}" alt="No se pudo obtener la imagen" class="img-fluid rounded rounded-3">
             </div>
-            <div class="form-group">
-                <label for="inputPriority" class="col-sm-3 control-label">Prioridad</label>
 
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="inputPriority" id="inputPriority"
-                           placeholder="priority" value="{{ ad.priority }}">
-                </div>
-            </div>
             <div class="form-group text-center">
                 <button type="submit" value="submit" class="btn btn-warning">Actualizar</button>
-                <a class="btn btn-danger" href ="/delete/{{ ad._id }}">Eliminar</a>
+                <a class="btn btn-danger" href ="/delete/{{ p._id }}">Eliminar</a>
             </div>
         </form>
     </div>

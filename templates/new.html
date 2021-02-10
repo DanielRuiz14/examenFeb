@@ -11,33 +11,48 @@
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <form class="form-horizontal" role="form" action="" method="post">
+        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="inputText" class="col-sm-3 control-label">Descripci&oacute;n</label>
+                <label for="inputText" class="col-sm-3 control-label">T&iacute;tulo</label>
 
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="inputText" id="inputText" placeholder="text">
+                    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Título">
                 </div>
             </div>
+
             <div class="form-group">
-                <label for="inputAuthor" class="col-sm-3 control-label">e-mail</label>
+                <label for="subir-archivo" class="col-sm-3 control-label">Imagen</label>
 
                 <div class="col-sm-6">
-                    <input type="email" class="form-control" name="inputAuthor" id="inputAuthor"
-                           placeholder="author">
+                    <input id="subir-archivo" type='file' onchange="readURL(this);" name="imagen"   required/>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="inputPriority" class="col-sm-3 control-label">Prioridad</label>
 
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="inputPriority" id="inputPriority"
-                           placeholder="priority">
-                </div>
-            </div>
+            
             <div class="form-group text-center">
                 <button type="submit" value="submit" class="btn btn-success">Crear</button>
             </div>
+        <script>
+            function clicar_input(){
+                $("#subir-archivo").click();
+                $(this).blur();
+            }
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+              
+                  reader.onload = function (e) {
+                    $('#imagen-mostrar')
+                    .attr('src', e.target.result)
+                    .removeAttr('hidden');
+                    
+                  };
+              
+                  reader.readAsDataURL(input.files[0]);
+                }
+              }
+        </script>
         </form>
     </div>
     <div class="col-md-2"></div>
